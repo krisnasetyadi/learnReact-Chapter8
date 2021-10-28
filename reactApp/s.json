@@ -1,0 +1,495 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "This is a sample server Seteam Player .",
+      "version": "1.0.0",
+      "title": "Swagger Player",
+      "contact": {
+        "email": "krisnadwisetyadi@gmail.com"
+      }
+    },
+    "host": "localhost:5000",
+    "basePath": "/docs",
+    "tags": [
+      {
+        "name": "players",
+        "description": "Everything about Player on Seteam",
+        "externalDocs": {
+          "description": "Find out more",
+          "url": "localhost:3000/signup"
+        }
+      }
+    ],
+    "schemes": [
+      "https",
+      "http"
+    ],
+    "paths": {
+      "/players": {
+        "post": {
+          "tags": [
+            "players"
+          ],
+          "summary": "Add a new player",
+          "description": "",
+          "operationId": "addPlayer",
+          "consumes": [
+            "application/json",
+            "application/xml"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Player that needs add in games account",
+              "required": true,
+              "schema": {
+                "$ref": "localhost:3000/players"
+              }
+            }
+          ],
+          "responses": {
+            "405": {
+              "description": "Invalid input"
+            }
+          }
+        },
+        "put": {
+          "tags": [
+            "players"
+          ],
+          "summary": "Update an existing player",
+          "description": "",
+          "operationId": "updatePlayer",
+          "consumes": [
+            "application/json",
+            "application/xml"
+          ],
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Players that need to be update",
+              "required": true,
+              "schema": {
+                "$ref": "localhost:3000/players"
+              }
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Player not found"
+            },
+            "405": {
+              "description": "Validation exception"
+            }
+          }
+        },
+        "delete": {
+          "tags": [
+            "players"
+          ],
+          "summary": "Delete player",
+          "description": "This can only be done by the logged in player.",
+          "operationId": "deletePlayer",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "username",
+              "in": "path",
+              "description": "The name that needs to be deleted",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Cant Delete this supplied"
+            },
+            "404": {
+              "description": "User not found"
+            }
+          }
+        }
+      },
+      "/players/findByUsername": {
+        "get": {
+          "tags": [
+            "players"
+          ],
+          "summary": "Finds the other player by username",
+          "description": "Multiple username values can be provided with comma separated strings",
+          "operationId": "findPlayersByUsername",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "status",
+              "in": "query",
+              "description": "Username values that need to be considered for filter",
+              "required": true,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "available",
+                  "pending"
+                ],
+                "default": "available"
+              },
+              "collectionFormat": "multi"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "localhost:3000/players"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid username value"
+            }
+          }
+        }
+      },
+      "/players/findById": {
+        "get": {
+          "tags": [
+            "players"
+          ],
+          "summary": "Finds the other player by Id",
+          "description": "Multiple Id values can be provided with comma separated strings",
+          "operationId": "findPlayersById",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "status",
+              "in": "query",
+              "description": "Id values that need to be considered for filter",
+              "required": true,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "available",
+                  "pending"
+                ],
+                "default": "available"
+              },
+              "collectionFormat": "multi"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "localhost:3000/players"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid Id value"
+            }
+          }
+        }
+      },
+      "/players/findAllPlayer": {
+        "get": {
+          "tags": [
+            "players"
+          ],
+          "summary": "Finds the other player by map",
+          "description": "Multiple Id values can be provided with comma separated strings",
+          "operationId": "findPlayersById",
+          "produces": [
+            "application/xml",
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "status",
+              "in": "query",
+              "description": "Find all players without any spesific",
+              "required": true,
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": [
+                  "available",
+                  "pending"
+                ],
+                "default": "available"
+              },
+              "collectionFormat": "multi"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "localhost:3000/players"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid Id value",
+              "/players/findByEmail": null
+            }
+          },
+          "get": {
+            "tags": [
+              "players"
+            ],
+            "summary": "Get user by email",
+            "description": "",
+            "operationId": "getUserByName",
+            "produces": [
+              "application/xml",
+              "application/json"
+            ],
+            "parameters": [
+              {
+                "name": "username",
+                "in": "path",
+                "description": "The email that needs to be fetched. Use user1@gmail.com for testing. ",
+                "required": true,
+                "type": "string"
+              }
+            ],
+            "responses": {
+              "200": {
+                "description": "successful operation",
+                "schema": {
+                  "$ref": "localhost:3000/player"
+                }
+              },
+              "400": {
+                "description": "Invalid email supplied"
+              },
+              "404": {
+                "description": "User not found"
+              }
+            }
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "petstore_auth": {
+        "type": "oauth2",
+        "authorizationUrl": "localhost:3000/players",
+        "flow": "implicit",
+        "scopes": {
+          "write:players": "modify players in your account",
+          "read:players": "read your players"
+        }
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    },
+    "definitions": {
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "petId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "shipDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "description": "Order Status",
+            "enum": [
+              "placed",
+              "approved",
+              "delivered"
+            ]
+          },
+          "complete": {
+            "type": "boolean",
+            "default": false
+          }
+        },
+        "xml": {
+          "name": "Order"
+        }
+      },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Category"
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "username": {
+            "type": "string"
+          },
+          "firstName": {
+            "type": "string"
+          },
+          "lastName": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "userStatus": {
+            "type": "integer",
+            "format": "int32",
+            "description": "User Status"
+          }
+        },
+        "xml": {
+          "name": "User"
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Tag"
+        }
+      },
+      "Pet": {
+        "type": "object",
+        "required": [
+          "name",
+          "photoUrls"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "category": {
+            "$ref": "#/definitions/Category"
+          },
+          "name": {
+            "type": "string",
+            "example": "doggie"
+          },
+          "photoUrls": {
+            "type": "array",
+            "xml": {
+              "name": "photoUrl",
+              "wrapped": true
+            },
+            "items": {
+              "type": "string"
+            }
+          },
+          "tags": {
+            "type": "array",
+            "xml": {
+              "name": "tag",
+              "wrapped": true
+            },
+            "items": {
+              "$ref": "#/definitions/Tag"
+            }
+          },
+          "status": {
+            "type": "string",
+            "description": "pet status in the store",
+            "enum": [
+              "available",
+              "pending",
+              "sold"
+            ]
+          }
+        },
+        "xml": {
+          "name": "Player"
+        }
+      },
+      "ApiResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "type": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    }
+  }
